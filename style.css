@@ -32,6 +32,7 @@ header, main, footer {
 header {
     flex: 0 0 auto;
     position: fixed;
+    background-color: rgb(207 197 180);
 }
 
 main {
@@ -122,6 +123,7 @@ nav a:hover {
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0%);
+    align-items: center;
 }
 
 .image-container .arrow img {
@@ -140,4 +142,29 @@ nav a:hover {
 
 .footer .social-media a {
     margin: 0 10px;
+}
+.day-header {
+    display: flex;
+
+}
+.day-notes {
+    color: rgb(8 45 62);
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid rgb(160, 150, 150);
+    padding-left: 40px;
+    margin-top: 15px;
+
+}
+.notees-container {
+    display: flexbox;
+    margin: 20px;
+}
+main {
+    margin-top: 40px;
+}
+.create {
+    align-self: flex-start;
+    display: inline-block; 
 }
