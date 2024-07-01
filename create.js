@@ -1,37 +1,15 @@
-const noteeForm = document.querySelector("#notee-form");
-const noteeFormSubmitBtn = document.querySelector("#notee-form-submit");
+const createNewDayButton = document.querySelector("#create-day-button");
 
-function sendData() {
-  let data = new FormData(noteeForm);
-  let obj = {};
-
-  data.forEach((value, key) => {
-    obj[key] = value;
-  });
-
-  let options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json, text/plain, */*",
-    },
-    body: JSON.stringify(obj),
-  };
-
-  fetch("https://testapi.io/api/Bronislava/resource/animals", options)
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error("Server response wasn't OK");
-      }
-    })
-    .catch((error) => {
-      console.error("Error: ", error);
-    });
-}
-
-noteeFormSubmitBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  sendData();
+createNewDayButton.addEventListener("click", () => {
+    let form = document.querySelector("#form-container");
+    form.style.display = 'block';
 });
+
+function closeForm(event) {
+    event.preventDefault();
+    const formContainer = event.target.closest('.form-container');
+    const formContent = document.getElementById("form-content");
+    const firstName = document.querySelector("#firstName");
+    formContent.innerHTML += "<p class='day-notes'>" + firstName.value + "</p>";
+    formContainer.style.display = 'none';
+}
