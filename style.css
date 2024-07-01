@@ -3,7 +3,9 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+nav a {
+    color: rgb(8 45 62);
+}
 nav a.logo {
     padding: 0;
     
@@ -29,6 +31,7 @@ header, main, footer {
 
 header {
     flex: 0 0 auto;
+    position: fixed;
 }
 
 main {
@@ -40,8 +43,8 @@ main {
 
 .footer {
     flex: 0 0 auto;
-    background-color: #333;
-    color: #fff;
+    background-color: rgb(41 75 91);
+    color: rgb(241 236 226);
     text-align: center;
     padding: 5px;
     position: relative;
@@ -61,7 +64,7 @@ nav {
 }
 
 nav a {
-    color: rgb(36, 34, 34);
+    color: rgb(8 45 62);
     text-decoration: none;
     padding: 10px 15px;
     font-size: 15px;
@@ -72,8 +75,8 @@ nav a {
 }
 
 nav a:hover {
-    background: rgb(194 177 155);;
-    color: black;
+    background: rgb(194 177 155);
+    color: rgb(8 45 62);
     border-radius: 5px;
 }
 
@@ -94,37 +97,41 @@ nav a:hover {
 
 .description {
     text-align: center;
-    background: rgba(0, 0, 0, 0.5);
-    transform: translate(-50%, -50%);
+    background: rgba(41, 75, 91, 0.774);
     padding: 10px;
     border-radius: 10px;
+    color: rgb(241 236 226);
+    text-decoration:solid
 }
 .start{
     display: flex;
     justify-content: center;
-    gap: 5px;
-    background: rgba(0, 0, 0, 0.5);
-    transform: translate(-50%, -50%);
+    background:  rgba(41, 75, 91, 0.774);
     padding: 10px;
     border-radius: 10px;
+    color: rgb(241 236 226);
+    gap: 10px;
+    
     
 }
 .first-page-text{
-    display: flexbox;
-    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
     border-radius: 10px;
     position: absolute;
-    left: 50%;;
-
+    left: 50%;
+    transform: translate(-50%, 0%);
 }
+
 .image-container .arrow img {
-    width: 20px;
+    width: 30px;
     height: auto;
     border-radius: 15px;
 }
 
 .footer a {
-    color: #ffcc00;
+    color: rgb(190 173 151)
 }
 
 .footer a:hover {
