@@ -9,7 +9,7 @@ function closeForm(event) {
     event.preventDefault();
     const formContainer = event.target.closest('.form-container');
     const formContent = document.getElementById("form-content");
-    const firstName = document.querySelector("#firstName");
-    formContent.innerHTML += "<p class='day-notes'>" + firstName.value + "</p>";
+    const date = document.querySelector("#date");
+    formContent.innerHTML += "<h2 class='day-notes'>" + date.value + "</h2>";
     formContainer.style.display = 'none';
 }
