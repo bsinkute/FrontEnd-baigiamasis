@@ -6,29 +6,39 @@ document.addEventListener("DOMContentLoaded", function() {
         form.style.display = 'block';
     });
 
+    const noteForm = document.getElementById("note-form");
+
+    noteForm.addEventListener('submit', closeForm);
+
     function closeForm(event) {
-        event.preventDefault();
+        if(!this.checkValidity()){
+            event.preventDefault();
+            this.reportValidity();
+        }
+
         const formContainer = event.target.closest('.form-container');
         const formContent = document.getElementById("form-content");
         const date = document.querySelector("#date").value;
         const events = document.querySelector("#event").value;
 
-        if (!date || !events) {
-            alert("Please fill in both the date and events.");
-            return;
-        }
-
         const dayNotesHTML = "<article class='day-notes'><div class='day-header'>" + 
                              "<h2>" + date + "</h2>" + 
-                             "<nav><p>Update</p></nav><nav><p>Delete</p></nav></div>" + 
+                             "<nav><p>Update</p></nav><nav><button class='delete-btn'>Delete</button></nav></div>" + 
                              "<ul>" + getList(events) + "</ul></article>";
 
         formContent.innerHTML += dayNotesHTML;
+
+        formContent.addEventListener('click', function(event) {
+            if (event.target.classList.contains('delete-btn')) {
+                const article = event.currentTarget.querySelector('.day-notes');
+                if (article) {
+                    article.remove();
+                }
+            }
+        });
         saveToLocalStorage(date, events);
         formContainer.style.display = 'none';
     }
-
-    document.querySelector("#form-close-button").addEventListener("click", closeForm);
 
     function getList(events) {
         if (!events) return '';
@@ -57,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         notes.forEach(note => {
             const dayNotesHTML = "<article class='day-notes'><div class='day-header'>" + 
-                                 "<h2>" + (note.date || '') + "</h2>" + 
+                                 "<h2>" + (note.date) + "</h2>" + 
                                  "<nav><p>Update</p></nav><nav><p>Delete</p></nav></div>" + 
                                  "<ul>" + getList(note.events) + "</ul></article>";
             formContent.innerHTML += dayNotesHTML;
