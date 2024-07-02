@@ -167,6 +167,8 @@ main {
 .create {
     align-self: flex-start;
     display: inline-block; 
+    padding: 0;
+    border: none;
 }
 .form-container {
     display: none;
