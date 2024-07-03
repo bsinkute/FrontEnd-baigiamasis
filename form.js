@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function() {
         return "<article class='day-notes' data-date='" + date + "' data-events='" + events + "'>" + 
                "<div class='day-header'>" + 
                "<h2>" + date + "</h2>" + 
-               "<nav><button class='update-btn'>Update</button></nav><nav><button class='delete-btn'>Delete</button></nav></div>" + 
+               "<nav class= update><button class='update-btn'>Update</button></nav><nav class = delete><button class='delete-btn'>Delete</button></nav><button class='close-btn' style='display:none;'>X</button></div>" + 
                "<ul>" + getList(events) + "</ul></article>";
     }
 
