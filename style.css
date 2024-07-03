@@ -8,7 +8,6 @@ nav a {
 }
 nav a.logo {
     padding: 0;
-    
 }
 
 nav a.logo img {
@@ -72,7 +71,6 @@ nav a {
     background-color: rgb(216, 208, 192);
     border-radius: 5px;
     border: 1px solid rgb(160, 150, 150);
-
 }
 
 nav a:hover {
@@ -84,10 +82,6 @@ nav a:hover {
 .image-container {
     display: grid;
     align-items: center;
-
-    
-    
-
 }
 
 .image-container img {
@@ -102,20 +96,20 @@ nav a:hover {
     padding: 10px;
     border-radius: 10px;
     color: rgb(241 236 226);
-    text-decoration:solid
+    text-decoration: solid;
 }
-.start{
+
+.start {
     display: flex;
     justify-content: center;
-    background:  rgba(41, 75, 91, 0.774);
+    background: rgba(41, 75, 91, 0.774);
     padding: 10px;
     border-radius: 10px;
     color: rgb(241 236 226);
     gap: 10px;
-    
-    
 }
-.first-page-text{
+
+.first-page-text {
     display: flex;
     flex-direction: column;
     gap: 50px;
@@ -133,7 +127,7 @@ nav a:hover {
 }
 
 .footer a {
-    color: rgb(190 173 151)
+    color: rgb(190 173 151);
 }
 
 .footer a:hover {
@@ -143,10 +137,11 @@ nav a:hover {
 .footer .social-media a {
     margin: 0 10px;
 }
+
 .day-header {
     display: flex;
-
 }
+
 .day-notes {
     color: rgb(8 45 62);
     text-decoration: none;
@@ -157,6 +152,7 @@ nav a:hover {
     margin-top: 15px;
     width: 80vw;
 }
+
 .notees-container {
     display: flexbox;
     margin: 20px;
@@ -166,12 +162,12 @@ main {
 }
 .create, .update, .delete {
     align-self: flex-start;
-    display: inline-block; 
+    display: inline-block;
     padding: 0;
     border: none;
 }
 
-.update-btn, .delete-btn, #create-day-button{
+.update-btn, .delete-btn, #create-day-button {
     color: rgb(8 45 62);
     text-decoration: none;
     padding: 5px 10px;
@@ -182,11 +178,12 @@ main {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.update-btn:hover, .delete-btn:hover, #create-day-button:hover{
+.update-btn:hover, .delete-btn:hover, #create-day-button:hover {
     background-color: rgb(194 177 155);
     color: rgb(8 45 62);
     border-radius: 5px;
 }
+
 .form-container {
     display: none;
     background: white;
@@ -199,8 +196,40 @@ main {
     transform: translate(-50%, -50%);
     z-index: 999;
 }
+
 .day-notes ul li {
     word-wrap: break-word;
     white-space: pre-wrap;
     margin-bottom: 10px;
+}
+
+.expanded-view {
+    background-color: white;
+    padding: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#close-expanded-view {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: rgb(216, 208, 192);
+    border: 1px solid rgb(160, 150, 150);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#close-expanded-view:hover {
+    background-color: rgb(194, 177, 155);
+    color: rgb(8 45 62);
 }

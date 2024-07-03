@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function() {
         return "<article class='day-notes' data-date='" + date + "' data-events='" + events + "'>" + 
                "<div class='day-header'>" + 
                "<h2>" + date + "</h2>" + 
-               "<nav class= update><button class='update-btn'>Update</button></nav><nav class = delete><button class='delete-btn'>Delete</button></nav><button class='close-btn' style='display:none;'>X</button></div>" + 
+               "<nav class= update><button class='update-btn'>Update</button></nav><nav class = delete><button class='delete-btn'>Delete</button></nav></div>" + 
                "<ul>" + getList(events) + "</ul></article>";
     }
 
@@ -77,7 +77,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 populateForm(date, events);
                 document.querySelector("#form-container").style.display = 'block';
             }
-        }
+        } else if (event.target.closest('.day-notes')) { 
+            expandNoteView(event.target.closest('.day-notes'));
+        } 
+    });
+
+    document.getElementById('close-expanded-view').addEventListener('click', function() {
+        closeExpandedView();
     });
 
     function getList(events) {
@@ -131,6 +137,23 @@ document.addEventListener("DOMContentLoaded", function() {
     function clearForm() {
         document.querySelector("#date").value = '';
         document.querySelector("#event").value = '';
+    }
+
+    function expandNoteView(note) {
+        const expandedView = document.getElementById("expanded-view");
+        const expandedNoteContent = document.getElementById("expanded-note-content");
+        const date = note.getAttribute('data-date');
+        const events = note.getAttribute('data-events');
+
+        expandedNoteContent.innerHTML = getNoteHTML(date, events);
+        document.getElementById("form-content").style.display = 'none';
+        expandedView.style.display = 'block';
+    }
+
+    function closeExpandedView() {
+        const expandedView = document.getElementById("expanded-view");
+        expandedView.style.display = 'none';
+        document.getElementById("form-content").style.display = 'block';
     }
 
     loadFromLocalStorage();
