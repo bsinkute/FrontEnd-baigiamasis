@@ -1,4 +1,4 @@
-function getNewQuote() {
+export function getNewQuote() {
     return fetch('https://api.quotable.io/random') //pats fetchas grazina promise todel nereikia dar daryti, kad promisas grazintu promisa
         .then(response => {
             if (!response.ok) {
