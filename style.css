@@ -167,7 +167,7 @@ main {
     border: none;
 }
 
-.update-btn, .delete-btn, #create-day-button, .close-btn {
+.update-btn, .delete-btn, #create-day-button, .close-btn, .send-message {
     color: rgb(8 45 62);
     text-decoration: none;
     padding: 5px 10px;
@@ -178,7 +178,7 @@ main {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.update-btn:hover, .delete-btn:hover, #create-day-button:hover, .close-btn:hover {
+.update-btn:hover, .delete-btn:hover, #create-day-button:hover, .close-btn:hover, .send-message:hover {
     background-color: rgb(194 177 155);
     color: rgb(8 45 62);
     border-radius: 5px;
@@ -235,7 +235,7 @@ main {
 }
 
 .quote-container {
-    background-color: #f0f0f0;
+    background: rgba(41, 75, 91, 0.89);
     padding: 20px;
     border-radius: 8px;
     margin-top: 20px;
@@ -243,6 +243,7 @@ main {
 }
 
 .quote-text {
+    color: rgb(241 236 226);
     font-style: italic;
     margin-bottom: 10px;
 }
@@ -250,5 +251,65 @@ main {
 .quote-author {
     font-size: 1rem;
     text-align: right;
-    color: #666;
+    color: #b9b2b2;
+}
+
+.contact-form {
+    border-bottom: 1px solid rgb(160, 150, 150);
+    padding: 10px;
+    margin: 10px;
+}
+
+.contact-info {
+    margin-top: 20px;
+    border-bottom: 1px solid rgb(160, 150, 150);
+}
+
+.contact-info h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.contact-info p {
+    margin-bottom: 10px;
+}
+
+.employee-photos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+.employee {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+.employee img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.social-media {
+    margin-top: 20px;
+}
+
+.social-media a {
+    margin-right: 10px;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.social-media a:hover {
+    text-decoration: underline;
+}
+.main{
+    align-items:start;
 }
