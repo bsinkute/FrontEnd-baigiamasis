@@ -72,6 +72,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 const events = article.getAttribute('data-events');
                 article.remove();
                 removeFromLocalStorage(date, events);
+                closeExpandedView();
             }
         } else if (event.target.classList.contains('update-btn')) {
             const article = event.target.closest('.day-notes');
