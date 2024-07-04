@@ -52,11 +52,16 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function getNoteHTML(date, events) {
-        return "<article class='day-notes' data-date='" + date + "' data-events='" + events + "'>" + 
-               "<div class='day-header'>" + 
-               "<h2>" + date + "</h2>" + 
-               "<nav class= update><button class='update-btn'>Update</button></nav><nav class = delete><button class='delete-btn'>Delete</button></nav></div>" + 
-               "<ul>" + getList(events) + "</ul></article>";
+        return `
+            <article class='day-notes' data-date='${date}' data-events='${events}'>
+                <div class='day-header'>
+                    <h2>${date}</h2>
+                    <nav class='update'><button class='update-btn'>Update</button></nav>
+                    <nav class='delete'><button class='delete-btn'>Delete</button></nav>
+                </div>
+                <ul>${getList(events, 3)}</ul>
+                ${events.split('\n').length > 3 ? "<a href='#' class='read-more'>Read more</a>" : ""}
+            </article>`;
     }
 
     document.getElementById('form-content').addEventListener('click', function(event) {
@@ -68,36 +73,36 @@ document.addEventListener("DOMContentLoaded", function() {
                 article.remove();
                 removeFromLocalStorage(date, events);
             }
-        } else if (event.target.classList.contains('update-btn')) { 
+        } else if (event.target.classList.contains('update-btn')) {
             const article = event.target.closest('.day-notes');
             if (article) {
-                updateIndex = Array.from(document.querySelectorAll('.day-notes')).indexOf(article); 
+                updateIndex = Array.from(document.querySelectorAll('.day-notes')).indexOf(article);
                 const date = article.getAttribute('data-date');
                 const events = article.getAttribute('data-events');
                 populateForm(date, events);
                 document.querySelector("#form-container").style.display = 'block';
             }
-        } else if (event.target.closest('.day-notes')) { 
-            expandNoteView(event.target.closest('.day-notes'));
-        } 
+        } else if (event.target.classList.contains('read-more')) {
+            event.preventDefault();
+            const article = event.target.closest('.day-notes');
+            showSingleNoteView(article);
+        } else if (event.target.classList.contains('close-btn')) {
+            closeExpandedView();
+        }
     });
 
-    document.getElementById('close-expanded-view').addEventListener('click', function() {
-        closeExpandedView();
-    });
-
-    function getList(events) {
+    function getList(events, limit = null) {
         if (!events) return '';
 
         const eventsList = events.split('\n');
         let listItems = '';
-        
-        eventsList.forEach(event => {
-            if (event.trim()) {
+
+        eventsList.forEach((event, index) => {
+            if (event.trim() && (limit === null || index < limit)) {
                 listItems += "<li>" + event.trim() + "</li>";
             }
         });
-        
+
         return listItems;
     }
 
@@ -107,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function() {
         localStorage.setItem("dayNotes", JSON.stringify(notes));
     }
 
-    function updateLocalStorage(index, date, events) { 
+    function updateLocalStorage(index, date, events) {
         let notes = JSON.parse(localStorage.getItem("dayNotes")) || [];
         notes[index] = { date: date, events: events };
         localStorage.setItem("dayNotes", JSON.stringify(notes));
@@ -139,21 +144,34 @@ document.addEventListener("DOMContentLoaded", function() {
         document.querySelector("#event").value = '';
     }
 
-    function expandNoteView(note) {
-        const expandedView = document.getElementById("expanded-view");
-        const expandedNoteContent = document.getElementById("expanded-note-content");
-        const date = note.getAttribute('data-date');
-        const events = note.getAttribute('data-events');
+    function showSingleNoteView(note) {
+        const allNotes = document.querySelectorAll('.day-notes');
+        allNotes.forEach(n => {
+            if (n !== note) {
+                n.style.display = 'none';
+            }
+        });
 
-        expandedNoteContent.innerHTML = getNoteHTML(date, events);
-        document.getElementById("form-content").style.display = 'none';
-        expandedView.style.display = 'block';
+        note.querySelector('ul').innerHTML = getList(note.getAttribute('data-events'));
+        note.querySelector('.read-more').style.display = 'none';
+        note.insertAdjacentHTML('beforeend', "<button class='close-btn'>Close</button>");
+        createNewDayButton.style.display = 'none';
     }
 
     function closeExpandedView() {
-        const expandedView = document.getElementById("expanded-view");
-        expandedView.style.display = 'none';
-        document.getElementById("form-content").style.display = 'block';
+        const allNotes = document.querySelectorAll('.day-notes');
+        allNotes.forEach(n => {
+            n.style.display = 'block';
+            n.querySelector('ul').innerHTML = getList(n.getAttribute('data-events'), 3);
+            if (n.querySelector('.read-more')) {
+                n.querySelector('.read-more').style.display = 'inline';
+            }
+            const closeButton = n.querySelector('.close-btn');
+            if (closeButton) {
+                closeButton.remove();
+            }
+        });
+        createNewDayButton.style.display = 'block';
     }
 
     loadFromLocalStorage();

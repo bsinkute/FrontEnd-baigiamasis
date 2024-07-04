@@ -167,7 +167,7 @@ main {
     border: none;
 }
 
-.update-btn, .delete-btn, #create-day-button {
+.update-btn, .delete-btn, #create-day-button, .close-btn {
     color: rgb(8 45 62);
     text-decoration: none;
     padding: 5px 10px;
@@ -178,7 +178,7 @@ main {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.update-btn:hover, .delete-btn:hover, #create-day-button:hover {
+.update-btn:hover, .delete-btn:hover, #create-day-button:hover, .close-btn:hover {
     background-color: rgb(194 177 155);
     color: rgb(8 45 62);
     border-radius: 5px;
