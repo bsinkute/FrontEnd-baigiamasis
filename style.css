@@ -233,3 +233,22 @@ main {
     background-color: rgb(194, 177, 155);
     color: rgb(8 45 62);
 }
+
+.quote-container {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.quote-text {
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.quote-author {
+    font-size: 1rem;
+    text-align: right;
+    color: #666;
+}
