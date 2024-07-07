@@ -1,3 +1,10 @@
+import { loadFooter } from './footerLoader.js';
+loadFooter();
+
+import { loadHeader } from './headerLoader.js';
+loadHeader();
+
+
 document.addEventListener("DOMContentLoaded", function() {
     const createNewDayButton = document.querySelector("#create-day-button");
 

@@ -1,20 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'PT Serif', serif;
 }
 nav a {
     color: rgb(8 45 62);
 }
 nav a.logo {
     padding: 0;
+    border: none;
+    background-color: rgb(207 197 180);
 }
 
 nav a.logo img {
-    width: 30px;
-    height: auto;
+    height: 40px;
     display: block;
-    border-radius: 5px;
+}
+
+.header-image{
+    display: flex;
+    
+
 }
 
 body {
@@ -41,6 +49,10 @@ main {
     align-items: center;
 }
 
+button {
+    font-size: inherit;
+}
+
 .footer {
     flex: 0 0 auto;
     background-color: rgb(41 75 91);
@@ -57,7 +69,6 @@ nav {
     align-items: center;
     justify-content: space-between;
     border-radius: 5px;
-    margin-bottom: 10px;
     padding: 5px 5px 5px 5px;
     border: 1px solid rgb(160, 150, 150)
     ;
@@ -141,6 +152,14 @@ nav a:hover {
 .day-header {
     display: flex;
 }
+.update{
+    margin-left: 20px;
+    margin-right: 10px;
+}
+.create{
+    margin-top: 10px;
+}
+
 
 .day-notes {
     color: rgb(8 45 62);
@@ -167,7 +186,7 @@ main {
     border: none;
 }
 
-.update-btn, .delete-btn, #create-day-button, .close-btn, .send-message {
+#form-close-button, .update-btn, .delete-btn, #create-day-button, .close-btn, .send-message {
     color: rgb(8 45 62);
     text-decoration: none;
     padding: 5px 10px;
@@ -178,15 +197,35 @@ main {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.update-btn:hover, .delete-btn:hover, #create-day-button:hover, .close-btn:hover, .send-message:hover {
+#form-close-button:hover, .update-btn:hover, .delete-btn:hover, #create-day-button:hover, .close-btn:hover, .send-message:hover {
     background-color: rgb(194 177 155);
     color: rgb(8 45 62);
     border-radius: 5px;
 }
+textarea {
+    width: 100%;
+    height: 200px;
+    box-sizing: border-box;
+    resize: none;
+    padding: 10px;
+    border: 1px solid rgb(160, 150, 150);
+    border-radius: 5px;
+    background-color: rgb(238, 232, 221);
+    
+}
+#date {
+    border: 1px solid rgb(160, 150, 150); 
+    color: rgb(8 45 62);
+    background-color: rgb(238, 232, 221);
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding: 5px;
+}
 
 .form-container {
     display: none;
-    background: white;
+    background: rgb(207 197 180);
+    color: rgb(8 45 62);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -195,6 +234,10 @@ main {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 999;
+    width: 70%;
+    overflow: auto;
+    box-sizing: border-box;
+
 }
 
 .day-notes ul li {
@@ -253,6 +296,17 @@ main {
     text-align: right;
     color: #b9b2b2;
 }
+.contact-section{
+    margin: 20px;
+}
+#name, #email {
+    border: 1px solid rgb(160, 150, 150); 
+    color: rgb(8 45 62);
+    background-color: rgb(238, 232, 221);
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding: 5px;
+}
 
 .contact-form {
     border-bottom: 1px solid rgb(160, 150, 150);
@@ -266,12 +320,22 @@ main {
 }
 
 .contact-info h2 {
-    font-size: 1.5rem;
     margin-bottom: 10px;
 }
 
 .contact-info p {
     margin-bottom: 10px;
+}
+
+.contact-section h1 {
+    margin-bottom: 10px;
+}
+.contact-section h2 {
+    margin-top: 15px;
+}
+
+.contact-section p {
+    margin-left: 20px;
 }
 
 .employee-photos {
@@ -296,20 +360,15 @@ main {
     margin-bottom: 10px;
 }
 
-.social-media {
-    margin-top: 20px;
-}
-
-.social-media a {
-    margin-right: 10px;
-    color: #333;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.social-media a:hover {
-    text-decoration: underline;
-}
 .main{
     align-items:start;
+}
+@media (max-width: 768px) {
+    body {
+        text-align: center;
+    }
+
+    section {
+        width: 100%;
+    }
 }

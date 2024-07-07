@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notes</title>
     <link rel="stylesheet" href="./style.css">
-    <script src="./form.js" defer></script>
+    <script src="./form.js" type="module" defer></script>
 </head>
 <body>
     <header class="header">
         <div id="header-placeholder">
         </div>
-        <script src="headerLoader.js"></script>
     </header>
     <main>
         <div class="notees-container" id="notees-container">
@@ -21,10 +20,10 @@
             </button>
         </nav>
         <div id="form-container" class="form-container">
-            <h3>Enter your details</h3>
+            <h3>Plan your day!</h3>
             <form id="note-form">
                 <input type="date" id="date" name="date" placeholder="Date" required/><br>
-                <textarea type="text" id="event" name="event" placeholder="What you whant to do?" required></textarea><br>
+                <textarea type="text" id="event" name="event" placeholder="Describe it here..." required></textarea><br>
                     
                 <button id="form-close-button" type="submit">Save</button>
             </form>
@@ -40,7 +39,6 @@
     <footer class="footer">
         <div id="footer-placeholder">
         </div>
-        <script src="footerLoader.js"></script>
     </footer>
     
 </body>
