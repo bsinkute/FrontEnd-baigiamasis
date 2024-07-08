@@ -489,7 +489,7 @@ textarea {
         max-width: 100%;
         margin: 0;
         padding: 0;
-        font-size: 20px;
+        font-size: 18px;
     }
     header {
         width: 100%;
@@ -506,10 +506,10 @@ textarea {
         border: 0px;
     }
     nav a {
-        font-size: 20px;
+        font-size: 18px;
     }
     .page{
-        font-size: 20px;
+        font-size: 18px;
     }
     main {
         max-width: 1500px;
