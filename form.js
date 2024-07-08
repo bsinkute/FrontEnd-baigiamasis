@@ -136,6 +136,8 @@ document.addEventListener("DOMContentLoaded", function() {
         const formContent = document.getElementById("form-content");
         let notes = JSON.parse(localStorage.getItem("dayNotes")) || [];
 
+        notes.sort((a, b) => new Date(b.date) - new Date(a.date));
+
         notes.forEach(note => {
             const dayNotesHTML = getNoteHTML(note.date, note.events);
             formContent.innerHTML += dayNotesHTML;
