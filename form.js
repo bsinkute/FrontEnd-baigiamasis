@@ -31,8 +31,8 @@ document.addEventListener("DOMContentLoaded", function() {
         const events = document.querySelector("#event").value;
 
         if (updateIndex === null) {
-            createNoteHTML(date, events);
             saveToLocalStorage(date, events);
+            loadFromLocalStorage();
         } else {
             updateNoteHTML(updateIndex, date, events);
             updateLocalStorage(updateIndex, date, events);
@@ -134,6 +134,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function loadFromLocalStorage() {
         const formContent = document.getElementById("form-content");
+        formContent.innerHTML = "";
         let notes = JSON.parse(localStorage.getItem("dayNotes")) || [];
 
         notes.sort((a, b) => new Date(b.date) - new Date(a.date));
