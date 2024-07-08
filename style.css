@@ -21,8 +21,48 @@ nav a.logo img {
 
 .header-image{
     display: flex;
-    
+}
 
+.page-link{
+    display: flex;
+}
+.page-link *{
+    margin: 0 1.5px;
+}
+
+.toggle-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.toggle {
+    position: relative;
+    width: 50px;
+    height: 24px;
+    background-color: #ccc;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.toggle:before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s;
+}
+
+.toggle.on {
+    background-color: #136bee;
+}
+
+.toggle.on:before {
+    transform: translateX(26px);
 }
 
 body {
@@ -385,7 +425,7 @@ textarea {
 
     nav a {
         font-size: 12px;
-        padding: 5px 10px;
+        padding: 5px 7px;
     }
 
     nav a.logo img {
@@ -420,7 +460,7 @@ textarea {
 
     nav a {
         font-size: 12px;
-        padding: 5px 10px;
+        padding: 5px 7px;
     }
 
     nav a.logo img {
@@ -453,7 +493,7 @@ textarea {
     }
     header {
         width: 100%;
-        height: 50px;
+        height: 60px;
         border-bottom: 1px solid rgb(160, 150, 150);
         align-items: center;
     }
@@ -475,4 +515,71 @@ textarea {
         max-width: 1500px;
     }
 
+}
+
+:root {
+    --background-color: rgb(207, 197, 180);
+    --text-color: rgb(8, 45, 62);
+    --link-color: rgb(8, 45, 62);
+    --header-background: rgb(207, 197, 180);
+    --footer-background: rgb(41, 75, 91);
+    --button-background: rgb(216, 208, 192);
+    --button-hover-background: rgb(194, 177, 155);
+    --button-text-color: rgb(8, 45, 62);
+    --form-input-color: rgb(238, 232, 221);
+}
+
+[data-theme="blue"] {
+    --background-color: rgb(180, 197, 207);
+    --text-color: rgb(62, 45, 8);
+    --link-color: rgb(62, 45, 8);
+    --header-background: rgb(180, 197, 207);
+    --footer-background: rgb(75, 91, 41);
+    --button-background: rgb(192, 208, 216);
+    --button-hover-background: rgb(155, 177, 194);
+    --button-text-color: rgb(62, 45, 8);
+    --form-input-color: rgb(235 243 245);
+}
+
+body, nav a, header, .footer, button  {
+    transition: background-color 0.5s, color 0.5s;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+nav a {
+    color: var(--button-text-color);
+    background-color: var(--button-background);
+}
+.logo{
+    color: var(--button-text-color);
+    background-color: var(--background-color);
+}
+
+header {
+    background-color: var(--header-background);
+}
+
+.footer {
+    background-color: var(--footer-background);
+}
+
+button, #form-close-button, .update-btn, .delete-btn, #create-day-button, .close-btn, .send-message {
+    color: var(--button-text-color);
+    background-color: var(--button-background);
+}
+
+button:hover, #form-close-button:hover, .update-btn:hover, .delete-btn:hover, #create-day-button:hover, .close-btn:hover, .send-message:hover, nav a:hover  {
+    background-color: var(--button-hover-background);
+}
+
+#name, #email, #message, #date, #event {
+    background-color: var(--form-input-color);
+}
+.form-container{
+    color: var(--button-text-color);
+    background-color: var(--background-color);
 }

@@ -1,26 +1,4 @@
-export function loadHeader() {
-    document.addEventListener("DOMContentLoaded", () => {
-            document.getElementById('header-placeholder').innerHTML = `
-            <header>
-                <nav>
-                    <div class="header-image">
-                        <a class="logo" href="./main.html"><img class="logo" src="./img/oie_transparent.png" alt="logo"></a>
-                    </div>
-                    <div class="page-link">
-                        <div class="toggle-wrapper">
-                            <div class="toggle"></div>
-                        </div>
-                        <a href="./main.html">Main</a>
-                        <a href="./notes.html">My notes</a>
-                        <a href="./contacts.html">Contacts</a>
-                    </div>
-                </nav>
-            </header>
-        `;
-    });
-}
-
-function toggleTheme() {
+export function toggleTheme() {
     const currentTheme = document.documentElement.getAttribute('data-theme');
     const newTheme = currentTheme === 'light' ? 'blue' : 'light';
     document.documentElement.setAttribute('data-theme', newTheme);

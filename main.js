@@ -1,8 +1,9 @@
 import { loadFooter } from './footerLoader.js';
 loadFooter();
 
-import { loadHeader } from './headerLoader.js';
+import { loadHeader, loadTheme } from './headerLoader.js';
 loadHeader();
+loadTheme();
 
 import { getNewQuote } from './quote.js';
 getNewQuote();
