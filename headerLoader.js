@@ -1,6 +1,6 @@
 export function loadHeader() {
     document.addEventListener("DOMContentLoaded", () => {
-            document.getElementById('header-placeholder').innerHTML = `
+        document.getElementById('header-placeholder').innerHTML = `
             <header>
                 <nav>
                     <div class="header-image">
