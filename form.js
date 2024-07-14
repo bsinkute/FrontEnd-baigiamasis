@@ -17,8 +17,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const noteForm = document.getElementById("note-form");
     noteForm.addEventListener('submit', handleFormSubmit);
 
-    let updateIndex = null;
-
     function handleFormSubmit(event) {
         event.preventDefault();
 
@@ -27,40 +25,24 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
 
+        const id = document.querySelector("#id").value;
         const date = document.querySelector("#date").value;
         const events = document.querySelector("#event").value;
 
-        if (updateIndex === null) {
-            saveToLocalStorage(date, events);
-            loadFromLocalStorage();
+        if (!id) {
+            createNote(date, events);
         } else {
-            updateNoteHTML(updateIndex, date, events);
-            updateLocalStorage(updateIndex, date, events);
+            updateNote(id, date, events);
         }
 
         document.querySelector("#form-container").style.display = 'none';
         clearForm();
-        updateIndex = null;
     }
 
-    function createNoteHTML(date, events) {
-        const formContent = document.getElementById("form-content");
-        const dayNotesHTML = getNoteHTML(date, events);
-        formContent.innerHTML += dayNotesHTML;
-    }
 
-    function updateNoteHTML(index, date, events) {
-        const formContent = document.getElementById("form-content");
-        const note = formContent.querySelectorAll('.day-notes')[index];
-        note.setAttribute('data-date', date);
-        note.setAttribute('data-events', events);
-        note.querySelector('h2').textContent = date;
-        note.querySelector('ul').innerHTML = getList(events);
-    }
-
-    function getNoteHTML(date, events) {
+    function getNoteHTML(id, date, events) {
         return `
-            <article class='day-notes' data-date='${date}' data-events='${events}'>
+            <article class='day-notes' data-id='${id}' data-date='${date}' data-events='${events}'>
                 <div class='day-header'>
                     <h2>${date}</h2>
                     <nav class='update'><button class='update-btn'>Update</button></nav>
@@ -75,19 +57,17 @@ document.addEventListener("DOMContentLoaded", function() {
         if (event.target.classList.contains('delete-btn')) {
             const article = event.target.closest('.day-notes');
             if (article) {
-                const date = article.getAttribute('data-date');
-                const events = article.getAttribute('data-events');
-                article.remove();
-                removeFromLocalStorage(date, events);
+                const id = article.getAttribute('data-id');
+                removeNote(id);
                 closeExpandedView();
             }
         } else if (event.target.classList.contains('update-btn')) {
             const article = event.target.closest('.day-notes');
             if (article) {
-                updateIndex = Array.from(document.querySelectorAll('.day-notes')).indexOf(article);
+                const id = article.getAttribute('data-id');
                 const date = article.getAttribute('data-date');
                 const events = article.getAttribute('data-events');
-                populateForm(date, events);
+                populateForm(id, date, events);
                 document.querySelector("#form-container").style.display = 'block';
             }
         } else if (event.target.classList.contains('read-more')) {
@@ -114,43 +94,14 @@ document.addEventListener("DOMContentLoaded", function() {
         return listItems;
     }
 
-    function saveToLocalStorage(date, events) {
-        let notes = JSON.parse(localStorage.getItem("dayNotes")) || [];
-        notes.push({ date: date, events: events });
-        localStorage.setItem("dayNotes", JSON.stringify(notes));
-    }
-
-    function updateLocalStorage(index, date, events) {
-        let notes = JSON.parse(localStorage.getItem("dayNotes")) || [];
-        notes[index] = { date: date, events: events };
-        localStorage.setItem("dayNotes", JSON.stringify(notes));
-    }
-
-    function removeFromLocalStorage(date, events) {
-        let notes = JSON.parse(localStorage.getItem("dayNotes")) || [];
-        notes = notes.filter(note => note.date !== date || note.events !== events);
-        localStorage.setItem("dayNotes", JSON.stringify(notes));
-    }
-
-    function loadFromLocalStorage() {
-        const formContent = document.getElementById("form-content");
-        formContent.innerHTML = "";
-        let notes = JSON.parse(localStorage.getItem("dayNotes")) || [];
-
-        notes.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-        notes.forEach(note => {
-            const dayNotesHTML = getNoteHTML(note.date, note.events);
-            formContent.innerHTML += dayNotesHTML;
-        });
-    }
-
-    function populateForm(date, events) {
+    function populateForm(id, date, events) {
+        document.querySelector("#id").value = id;
         document.querySelector("#date").value = date;
         document.querySelector("#event").value = events;
     }
 
     function clearForm() {
+        document.querySelector("#id").value = '';
         document.querySelector("#date").value = '';
         document.querySelector("#event").value = '';
     }
@@ -185,5 +136,93 @@ document.addEventListener("DOMContentLoaded", function() {
         createNewDayButton.style.display = 'block';
     }
 
-    loadFromLocalStorage();
+    function fetchNotes() {
+        const url = 'http://localhost:5082/api/notes';
+        const formContent = document.getElementById("form-content");
+        formContent.innerHTML = "";
+    
+        return fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(notes => {
+                if (notes) {
+                    notes.sort((a, b) => new Date(b.date) - new Date(a.date));
+                    notes.forEach(note => {
+                        const dayNotesHTML = getNoteHTML(note.id, note.date, note.events);
+                        formContent.innerHTML += dayNotesHTML;
+                    });
+                } else {
+                    formContent.innerHTML = "<p>Failed to load notes.</p>";
+                }
+            })
+            .catch(error => {
+                console.error('Failed to fetch notes:', error);
+                formContent.innerHTML = "<p>Failed to load notes.</p>";
+            });
+    }
+
+    function createNote (date, events) {
+        return fetch('http://localhost:5082/api/notes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id: 0, date: date, events: events })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(() => {
+            return fetchNotes();
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+    function updateNote(id, date, events) {
+        return fetch(`http://localhost:5082/api/notes`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id: id, date: date, events: events })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return fetchNotes();
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+    function removeNote(id) {
+        return fetch(`http://localhost:5082/api/notes/${id}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response;
+        })
+        .then(() => {
+            return fetchNotes();
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+    fetchNotes();
 });
