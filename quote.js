@@ -1,5 +1,5 @@
 export function getNewQuote() {
-    return fetch('https://api.quotable.io/random') //pats fetchas grazina promise todel nereikia dar daryti, kad promisas grazintu promisa
+    return fetch('http://localhost:5082/api/quote')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -24,5 +24,3 @@ function updateQuote(data) {
         console.error('No data to update');
     }
 }
-
-getNewQuote();
